@@ -25,6 +25,8 @@ class UCTNode():
     def select_leaf(self):
         current = self
         while current.is_expanded:
+            current.number_visits += 1
+            current.total_value -= 1
             current = current.best_child()
         return current
 
@@ -40,8 +42,7 @@ class UCTNode():
     def backup(self, value_estimate: float):
         current = self
         while current.parent is not None:
-            current.number_visits += 1
-            current.total_value += value_estimate
+            current.total_value += value_estimate + 1
             current = current.parent
 
 def UCT_search(game_state, num_reads):
