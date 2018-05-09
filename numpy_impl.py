@@ -33,8 +33,8 @@ class UCTNode():
     return self.child_total_value / (1 + self.child_number_visits)
 
   def child_U(self):
-    return math.sqrt(self.number_visits) *
-        (self.child_priors / (1 + self.child_number_visits))
+    return math.sqrt(self.number_visits) * (
+        self.child_priors / (1 + self.child_number_visits))
 
   def best_child(self):
     return np.argmax(self.child_Q() + self.child_U())
