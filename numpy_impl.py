@@ -60,7 +60,8 @@ class UCTNode():
     current = self
     while current.parent is not None:
       current.number_visits += 1
-      current.total_value += value_estimate
+      current.total_value += (value_estimate *
+        self.game_state.to_play)
       current = current.parent
 
 class DummyNode(object):
@@ -86,8 +87,11 @@ class NeuralNet():
     return np.random.random([362]), np.random.random()
 
 class GameState():
+  def __init__(self, to_play=1):
+    self.to_play = to_play
+
   def play(self, move):
-    return GameState()
+    return GameState(-self.to_play)
 
 num_reads = 10000
 import time
